@@ -2,14 +2,18 @@
 
 namespace CleanArch.Domain.Entities
 {
-    public sealed class Category
+    public sealed class Category : Entity
     {
-        public int Id { get; private set; }
         public string Name { get; private set; }
 
         public ICollection<Product> Products { get; set; }
 
         public Category(string name)
+        {
+            ValidateDomain(name);
+        }
+
+        public void Update(string name)
         {
             ValidateDomain(name);
         }
