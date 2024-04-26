@@ -1,3 +1,5 @@
+using CleanArch.Infra.IoC;
+
 namespace CleanArch.WebUI
 {
     public class Program
@@ -6,8 +8,10 @@ namespace CleanArch.WebUI
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddInfraestructure(builder.Configuration);
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
 
             var app = builder.Build();
 
@@ -18,7 +22,7 @@ namespace CleanArch.WebUI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
