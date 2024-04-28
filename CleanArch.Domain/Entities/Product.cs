@@ -13,14 +13,14 @@ namespace CleanArch.Domain.Entities
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
-        
+
         public Product(int id, string name, string description, decimal price, uint stock, string image)
         {
             DomainExceptionValidation.When(id < 0, "Invalid id value");
             ValidateDomain(name, description, price, stock, image);
             Id = id;
         }
-        
+
         public Product(string name, string description, decimal price, uint stock, string image)
         {
             ValidateDomain(name, description, price, stock, image);
@@ -42,7 +42,7 @@ namespace CleanArch.Domain.Entities
 
             DomainExceptionValidation.When(price < 0, "Invalid price value");
             DomainExceptionValidation.When(stock < 0, "Invalid stock value");
-         
+
             DomainExceptionValidation.When(image.Length > 250, "Invalid image name. too long");
 
             Name = name;
