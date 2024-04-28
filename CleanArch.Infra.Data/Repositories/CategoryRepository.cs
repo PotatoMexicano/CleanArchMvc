@@ -7,8 +7,8 @@ namespace CleanArch.Infra.Data.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        AppDbContext _context;
-        
+        readonly AppDbContext _context;
+
         public CategoryRepository(AppDbContext context)
         {
             _context = context;

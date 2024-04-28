@@ -32,8 +32,8 @@ namespace CleanArch.Application.DTOs
         [MaxLength(250)]
         public string Image { get; set; }
 
-        public Category Category{ get; set; }
-        
+        public Category Category { get; set; }
+
         [DisplayName("Categories")]
         public int CategoryId { get; set; }
     }

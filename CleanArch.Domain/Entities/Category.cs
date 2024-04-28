@@ -23,8 +23,8 @@ namespace CleanArch.Domain.Entities
             DomainExceptionValidation.When(id < 0, "Invalid Id value");
             Id = id;
             ValidateDomain(name);
-        }     
-        
+        }
+
         private void ValidateDomain(string name)
         {
             DomainExceptionValidation.When(string.IsNullOrEmpty(name), "Invalid name.Name is required");
