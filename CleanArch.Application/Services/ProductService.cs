@@ -19,19 +19,19 @@ namespace CleanArch.Application.Services
 
         public async Task Add(ProductDTO request)
         {
-            var productEntity = _mapper.Map<Product>(request);
+            Product productEntity = _mapper.Map<Product>(request);
             await _repository.InsertAsync(productEntity);
         }
 
         public async Task<ProductDTO> GetById(int id)
         {
-            var productEntity = await _repository.GetByIdAsync(id);
+            Product? productEntity = await _repository.GetByIdAsync(id);
             return _mapper.Map<ProductDTO>(productEntity);
         }
 
         public async Task<ProductDTO> GetProductCategory(int id)
         {
-            var productEntity = await _repository.GetProductCategoryAsync(id);
+            Product? productEntity = await _repository.GetProductCategoryAsync(id);
             return _mapper.Map<ProductDTO>(productEntity);
         }
 
@@ -43,13 +43,13 @@ namespace CleanArch.Application.Services
 
         public async Task Remove(int id)
         {
-            var productEntity = _repository.GetByIdAsync(id).Result;
+            Product? productEntity = _repository.GetByIdAsync(id).Result;
             await _repository.DeleteAsync(productEntity);
         }
 
         public async Task Update(ProductDTO request)
         {
-            var productEntity = _mapper.Map<Product>(request);
+            Product productEntity = _mapper.Map<Product>(request);
             await _repository.UpdateAsync(productEntity);
         }
     }
