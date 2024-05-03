@@ -1,56 +1,60 @@
 ﻿using AutoMapper;
 using CleanArch.Application.DTOs;
 using CleanArch.Application.Interfaces;
+using CleanArch.Application.Products.Queries;
 using CleanArch.Domain.Entities;
-using CleanArch.Domain.Interfaces;
+using MediatR;
 
 namespace CleanArch.Application.Services
 {
     public class ProductService : IProductService
     {
-        private readonly IProductRepository _repository;
+        private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public ProductService(IProductRepository productRepository, IMapper mapper)
+        public ProductService(IMediator mediator, IMapper mapper)
         {
-            _repository = productRepository;
+            _mediator = mediator;
             _mapper = mapper;
         }
 
         public async Task Add(ProductDTO request)
         {
-            Product productEntity = _mapper.Map<Product>(request);
-            await _repository.InsertAsync(productEntity);
+            throw new NotImplementedException("");
         }
 
         public async Task<ProductDTO> GetById(int id)
         {
-            Product? productEntity = await _repository.GetByIdAsync(id);
-            return _mapper.Map<ProductDTO>(productEntity);
+            throw new NotImplementedException("");
         }
 
         public async Task<ProductDTO> GetProductCategory(int id)
         {
-            Product? productEntity = await _repository.GetProductCategoryAsync(id);
-            return _mapper.Map<ProductDTO>(productEntity);
+            throw new NotImplementedException("");
         }
 
         public async Task<IEnumerable<ProductDTO>> GetProducts()
         {
-            IEnumerable<Product> productsEntity = await _repository.GetProductsAsync();
-            return _mapper.Map<IEnumerable<ProductDTO>>(productsEntity);
+            GetProductsQuery productsQuery = new GetProductsQuery();
+
+            if (productsQuery == null)
+            {
+                throw new Exception($"Entity could not be loaded.");
+            }
+
+            IEnumerable<Product> result = await _mediator.Send(productsQuery);
+
+            return _mapper.Map<IEnumerable<ProductDTO>>(result);
         }
 
         public async Task Remove(int id)
         {
-            Product? productEntity = _repository.GetByIdAsync(id).Result;
-            await _repository.DeleteAsync(productEntity);
+            throw new NotImplementedException("");
         }
 
         public async Task Update(ProductDTO request)
         {
-            Product productEntity = _mapper.Map<Product>(request);
-            await _repository.UpdateAsync(productEntity);
+            throw new NotImplementedException("");
         }
     }
 }
