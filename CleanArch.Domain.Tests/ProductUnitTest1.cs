@@ -52,7 +52,7 @@ namespace CleanArch.Domain.Tests
             Assert.Equal("name", product.Name);
             Assert.Equal("descaaaaaaaaaa", product.Description);
             Assert.Equal(10, product.Price);
-            Assert.Equal(5u, product.Stock);
+            Assert.Equal(5, product.Stock);
             Assert.Equal("image", product.Image);
             
         }
