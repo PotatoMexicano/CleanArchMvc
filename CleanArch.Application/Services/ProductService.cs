@@ -22,7 +22,7 @@ namespace CleanArch.Application.Services
         public async Task Add(ProductDTO request)
         {
             ProductCreateCommand productQuery = _mapper.Map<ProductCreateCommand>(request);
-            await _mediator.Publish(productQuery);
+            await _mediator.Send(productQuery);
         }
 
         public async Task<ProductDTO> GetById(int id)

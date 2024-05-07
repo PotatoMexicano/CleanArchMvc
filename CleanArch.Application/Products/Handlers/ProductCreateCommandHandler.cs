@@ -9,16 +9,16 @@ namespace CleanArch.Application.Products.Handlers
     {
         private readonly IProductRepository _repository;
 
-        public ProductCreateCommandHandler(IProductRepository productRepository)
+        public ProductCreateCommandHandler(IProductRepository repository)
         {
-            _repository = productRepository;
+            _repository = repository;
         }
 
         public async Task<Product> Handle(ProductCreateCommand request, CancellationToken cancellationToken)
         {
             Product product = new Product(request.Name, request.Description, request.Price, request.Stock, request.Image);
+            product.CategoryId = request.CategoryId;
 
-            product.CategoryId = request.CategoryID;
             return await _repository.InsertAsync(product);
 
         }

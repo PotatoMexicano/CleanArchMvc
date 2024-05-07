@@ -10,7 +10,7 @@ namespace CleanArch.Application.DTOs
         [Required(ErrorMessage = "The name is required.")]
         [MinLength(3)]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
     }
 }
