@@ -1,9 +1,12 @@
 ﻿using CleanArch.Application.Interfaces;
 using CleanArch.Application.Mappings;
 using CleanArch.Application.Services;
+using CleanArch.Domain.Account;
 using CleanArch.Domain.Interfaces;
 using CleanArch.Infra.Data.Context;
+using CleanArch.Infra.Data.Identity;
 using CleanArch.Infra.Data.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +34,19 @@ namespace CleanArch.Infra.IoC
             services.AddScoped<ICategoryService, CategoryService>();
 
             services.AddAutoMapper(typeof(DomainToDtoProfile));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddScoped<IAuthenticate, AuthenticateService>();
+            services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/Account/Login";
+                options.LoginPath = "/Account/Login";
+            });
 
             return services;
         }
