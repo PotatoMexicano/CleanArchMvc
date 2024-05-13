@@ -10,45 +10,44 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
 namespace CleanArch.Infra.IoC
 {
-    public static class DependencyInjection
-    {
-        public static IServiceCollection AddInfraestructure(this IServiceCollection services, IConfiguration configuration)
-        {
+	public static class DependencyInjection
+	{
+		public static IServiceCollection AddInfraestructure(this IServiceCollection services, IConfiguration configuration)
+		{
 
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+			services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
 
-            services.AddDbContext<AppDbContext>(options =>
-            {
-                options.UseSqlite(configuration.GetConnectionString("DefaultConnection"),
-                    b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName));
-            });
+			services.AddDbContext<AppDbContext>(options =>
+			{
+				options.UseSqlite(configuration.GetConnectionString("DefaultConnection"),
+					b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName));
+			});
 
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
+			services.AddScoped<ICategoryRepository, CategoryRepository>();
+			services.AddScoped<IProductRepository, ProductRepository>();
 
-            services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<ICategoryService, CategoryService>();
+			services.AddScoped<IProductService, ProductService>();
+			services.AddScoped<ICategoryService, CategoryService>();
 
-            services.AddAutoMapper(typeof(DomainToDtoProfile));
+			services.AddAutoMapper(typeof(DomainToDtoProfile));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddDefaultTokenProviders();
+			services.AddIdentity<ApplicationUser, IdentityRole>()
+				.AddEntityFrameworkStores<AppDbContext>()
+				.AddDefaultTokenProviders();
 
-            services.AddScoped<IAuthenticate, AuthenticateService>();
-            services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+			services.AddScoped<IAuthenticate, AuthenticateService>();
+			services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
 
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.AccessDeniedPath = "/Account/Login";
-                options.LoginPath = "/Account/Login";
-            });
+			services.ConfigureApplicationCookie(options =>
+			{
+				options.AccessDeniedPath = "/Account/Login";
+				options.LoginPath = "/Account/Login";
+			});
 
-            return services;
-        }
-    }
+			return services;
+		}
+	}
 }

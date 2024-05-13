@@ -7,10 +7,21 @@ namespace CleanArch.WebUI.Controllers
     public class AccountController : Controller
     {
         private readonly IAuthenticate _authenticate;
+        private readonly ISeedUserRoleInitial _seedUserRoleInitial;
 
-        public AccountController(IAuthenticate authenticate)
+        public AccountController(IAuthenticate authenticate, ISeedUserRoleInitial seedUserRoleInitial)
         {
             _authenticate = authenticate;
+            _seedUserRoleInitial = seedUserRoleInitial;
+        }
+
+        [HttpGet]
+        public IActionResult Populate()
+        {
+            _seedUserRoleInitial.SeedRoles();
+            _seedUserRoleInitial.SeedUsers();
+
+            return Ok();
         }
 
         [HttpGet]
