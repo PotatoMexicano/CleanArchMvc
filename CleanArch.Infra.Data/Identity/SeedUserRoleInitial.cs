@@ -14,7 +14,7 @@ namespace CleanArch.Infra.Data.Identity
             _roleManager = roleManager;
         }
 
-        public void SeedRules()
+        public void SeedRoles()
         {
             if (!_roleManager.RoleExistsAsync("User").Result)
             {
@@ -48,8 +48,7 @@ namespace CleanArch.Infra.Data.Identity
                 user.LockoutEnabled = false;
                 user.SecurityStamp = Guid.NewGuid().ToString();
 
-
-                IdentityResult result = _userManager.CreateAsync(user, "banana2024#").Result;
+                IdentityResult result = _userManager.CreateAsync(user, "Banana2024#").Result;
 
                 if (result.Succeeded)
                 {
@@ -69,7 +68,7 @@ namespace CleanArch.Infra.Data.Identity
                 user.SecurityStamp = Guid.NewGuid().ToString();
 
 
-                IdentityResult result = _userManager.CreateAsync(user, "banana2024#").Result;
+                IdentityResult result = _userManager.CreateAsync(user, "Banana2024#").Result;
 
                 if (result.Succeeded)
                 {

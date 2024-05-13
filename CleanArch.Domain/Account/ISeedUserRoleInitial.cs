@@ -3,6 +3,6 @@
     public interface ISeedUserRoleInitial
     {
         void SeedUsers();
-        void SeedRules();
+        void SeedRoles();
     }
 }
