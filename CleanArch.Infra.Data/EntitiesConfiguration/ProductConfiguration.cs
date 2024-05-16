@@ -12,8 +12,9 @@ namespace CleanArch.Infra.Data.EntitiesConfiguration
 
             builder.Property(x => x.Name).HasMaxLength(100).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(200).IsRequired();
+			builder.Property(x => x.CreateAt).HasColumnType("timestamp(6)");
 
-            builder.Property(x => x.Price).HasPrecision(10, 2);
+			builder.Property(x => x.Price).HasPrecision(10, 2);
             builder.HasOne(x => x.Category).WithMany(x => x.Products).HasForeignKey(x => x.CategoryId);
         }
     }
