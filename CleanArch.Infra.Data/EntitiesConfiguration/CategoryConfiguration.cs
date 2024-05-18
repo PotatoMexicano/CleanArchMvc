@@ -10,6 +10,7 @@ namespace CleanArch.Infra.Data.EntitiesConfiguration
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).HasMaxLength(100).IsRequired();
+            builder.Property(x => x.CreateAt).HasColumnType("timestamp(6)");
 
             builder.HasData(
                 new Category(1, "Material Escolar"),

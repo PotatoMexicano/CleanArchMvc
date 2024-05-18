@@ -22,7 +22,7 @@ namespace CleanArch.Infra.IoC
 
 			services.AddDbContext<AppDbContext>(options =>
 			{
-				options.UseSqlite(configuration.GetConnectionString("DefaultConnection"),
+				options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
 					b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName));
 			});
 
